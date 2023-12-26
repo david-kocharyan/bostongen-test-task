@@ -1,0 +1,51 @@
+version: '3.8'
+
+services:
+  bostongen_backend:
+    restart: always
+    build: .
+    entrypoint: ./docker-entrypoint.sh
+    container_name: bostongen_backend
+    ports:
+      - 8000:8000
+    env_file:
+      - ./.env
+    depends_on:
+      - db_bostongen
+      - redis
+    volumes:
+      - .:/usr/src/app
+  db_bostongen:
+    image: postgres:16
+    restart: always
+    container_name: bostongen_db_host
+    ports:
+      - "54320:5433"
+    volumes:
+      - postgres_data_bostongen:/var/lib/postgresql
+      - .:/code
+    env_file:
+      - ./.env
+  celery:
+    build: .
+    image: bostongen_backend
+    command: celery -A app.tasks worker --loglevel=info
+    volumes:
+      - celery_data_bostongen:/usr/src/app
+    environment:
+      - CELERY_BROKER=redis://redis:6379/0
+      - CELERY_BACKEND=redis://redis:6379/0
+    depends_on:
+      - bostongen_backend
+      - redis
+  redis:
+    image: redis:7.2.3-alpine
+    restart: always
+    ports:
+      - '63790:6379'
+    volumes:
+      - redis_data_bostongen:/data
+volumes:
+  postgres_data_bostongen:
+  celery_data_bostongen:
+  redis_data_bostongen:
