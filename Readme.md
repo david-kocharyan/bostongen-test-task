@@ -98,4 +98,9 @@ If you use docker please run following command`
     docker compose up --build
    ```
 
+For using API please open /docs url example`
+```text
+http://0.0.0.0:8001/docs
+```
+
 <p align="center"><a href="#top">Back to top</a></p>
