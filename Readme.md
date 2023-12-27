@@ -45,7 +45,10 @@ Here's instruction for installing and setting up the app step by step._
    git clone 
    ```
 
-2. Move to the working directory, install and activate your virtualenv`
+2. Copy ```.env.example``` to ```.env```
+
+
+3. Move to the working directory, install and activate your virtualenv`
    ```shell
     cd /project_path 
    ```
@@ -56,7 +59,7 @@ Here's instruction for installing and setting up the app step by step._
     source yourVenvName/bin/activate
    ```
 
-3. For PostgreSql adapter you should install on your machine (Linux/Ubuntu)`
+4. For PostgreSql adapter you should install on your machine (Linux/Ubuntu)`
    ```shell
     sudo apt-get update
     sudo apt-get install libpq-dev
@@ -67,22 +70,22 @@ Here's instruction for installing and setting up the app step by step._
     sudo apt-get install python3.10-dev
    ```
 
-4. Install requirements`
+5. Install requirements`
    ```shell
     pip install -r requirements.txt
    ```
 
-5. Set your .env file and migrate`
+6. Set your .env file and migrate`
    ```shell
     alembic upgrade head
    ```
 
-9. Run`
+7. Run`
    ```shell
     python main.py
    ```
 
-10. Run Celery`
+8. Run Celery`
    ```shell
     celery -A app.tasks worker --loglevel=info --concurrency=1
    ```
