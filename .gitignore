@@ -83,6 +83,8 @@ ENV/
 env.bak/
 venv.bak/
 
+logs/
+
 # mkdocs documentation
 /site
 

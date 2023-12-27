@@ -2,7 +2,7 @@
 FROM python:3.10-slim
 
 # set work directory
-WORKDIR /usr/src/app
+WORKDIR /usr/src/bostongen
 
 ENV PYTHONUNBUFFERED 1
 

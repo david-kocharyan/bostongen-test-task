@@ -16,7 +16,7 @@ router = APIRouter()
 async def upload_file(file: UploadFile = File()):
     promise_id = generate_unique_promise_id()
 
-    with tempfile.NamedTemporaryFile(delete=False) as temp_file:
+    with tempfile.NamedTemporaryFile(delete=False, dir='/tmp') as temp_file:
         temp_file.write(await file.read())
         temp_file_path = temp_file.name
 

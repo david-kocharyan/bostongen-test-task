@@ -1,3 +1,4 @@
+import os
 import hashlib
 import uuid
 
@@ -18,4 +19,7 @@ def calculate_actual_md5(file_path: str) -> str:
         for chunk in iter(lambda: file.read(chunk_size), b""):
             md5_hash.update(chunk)
 
-    return md5_hash.hexdigest()
+    md5_digest = md5_hash.hexdigest()
+    print(file_path)
+    os.remove(file_path)
+    return md5_digest
